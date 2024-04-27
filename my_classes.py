@@ -86,3 +86,4 @@ class Experiment:
                     data = self.__dict__
                     with open('experiment.json', 'w') as file:
                         json.dump(data, file)
+
