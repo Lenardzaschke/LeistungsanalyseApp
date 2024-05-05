@@ -1,6 +1,7 @@
 import json
 import json
 from datetime import datetime
+from urllib import request
 
 class Person:
     def __init__(self, name, age, sex):
@@ -24,6 +25,14 @@ class Person:
             
             max_hr_bpm  = input("Enter maximum heart rate:")
         return int(max_hr_bpm)
+
+    def put(self):
+        data = {
+            "name": self.first_name
+        }
+        data_json = json.dumps(data)
+        response = request.put(url, data=data_json)
+        print(response.text)
 
 class Experiment:
     def __init__(self, name, date, supervisor, subject):
@@ -70,6 +79,16 @@ class Experiment:
                 def __init__(self, name, birthdate, sex):
                     super().__init__(name, birthdate)
                     self.sex = sex
+
+                def update_email(self):
+                        data = {
+                            "name": self.first_name,
+                            "email": self.email
+                        }
+                        data_json = json.dumps(data)
+                        response = request.post(url, data=data_json)
+                        print(response.text)
+
 
             class Supervisor(Person):
                 def __init__(self, name, birthdate):
