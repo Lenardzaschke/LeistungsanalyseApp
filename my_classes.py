@@ -31,7 +31,7 @@ class Person:
             "name": self.first_name
         }
         data_json = json.dumps(data)
-        response = request.put(url, data=data_json)
+        response = requests.put(url, data=data_json)
         print(response.text)
 
 class Experiment:
@@ -75,34 +75,34 @@ class Experiment:
                         return age
                     return None
 
-            class Subject(Person):
-                def __init__(self, name, birthdate, sex):
-                    super().__init__(name, birthdate)
-                    self.sex = sex
+class Subject(Person):
+    def __init__(self, name, birthdate, sex):
+        super().__init__(name, birthdate)
+        self.sex = sex
 
-                def update_email(self):
-                        data = {
-                            "name": self.first_name,
-                            "email": self.email
-                        }
-                        data_json = json.dumps(data)
-                        response = request.post(url, data=data_json)
-                        print(response.text)
+    def update_email(self):
+            data = {
+                "name": self.first_name,
+                "email": self.email
+            }
+            data_json = json.dumps(data)
+            response = requests.post(url, data=data_json)
+            print(response.text)
 
 
-            class Supervisor(Person):
-                def __init__(self, name, birthdate):
-                    super().__init__(name, birthdate)
+class Supervisor(Person):
+    def __init__(self, name, birthdate):
+        super().__init__(name, birthdate)
 
-            class Experiment:
-                def __init__(self, name, date, supervisor, subject):
-                    self.name = name
-                    self.date = date
-                    self.supervisor = supervisor
-                    self.subject = subject
+class Experiment:
+    def __init__(self, name, date, supervisor, subject):
+        self.name = name
+        self.date = date
+        self.supervisor = supervisor
+        self.subject = subject
 
-                def save(self):
-                    data = self.__dict__
-                    with open('experiment.json', 'w') as file:
-                        json.dump(data, file)
+    def save(self):
+        data = self.__dict__
+        with open('experiment.json', 'w') as file:
+            json.dump(data, file)
 
